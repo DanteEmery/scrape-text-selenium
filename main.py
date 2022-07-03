@@ -12,19 +12,13 @@ def get_driver():
   options.add_argument("disable-blink-features=AutomationControlled")
   
   driver = webdriver.Chrome(options=options)
-  driver.get("http://automated.pythonanywhere.com")
+  driver.get("http://automated.pythonanywhere.com/login/")
   return driver
-
-def clean_text(text):
-  """ Extract only the temperature from text """
-  output = float(text.split(": ")[1])
-  return output
   
 def main():
   driver = get_driver()
   time.sleep(2)
-  element = driver.find_element(by="xpath", value="/html/body/div[1]/div/h1[2]")
-  return clean_text(element.text)
+  driver.find_element(by="id", value="id_username").send_keys("automated")
 
 print(main())
   
